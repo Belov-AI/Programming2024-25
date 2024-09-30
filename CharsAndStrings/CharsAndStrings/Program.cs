@@ -30,6 +30,14 @@ namespace CharsAndStrings
             Console.WriteLine(s[7]);
             Console.WriteLine(s.Substring(7));
 
+            Console.WriteLine("Введите целое число");
+            int n = int.Parse(Console.ReadLine());
+            Console.WriteLine("Введенное число " + n);
+
+            Console.WriteLine("Роман Л. Н. Толстого \"Война и мир\"");
+            Console.WriteLine("Роман Л. Н. Толстого \x00ABВойна и мир\x00BB");
+            Console.WriteLine("Прямой угол равен 90\x00B0\a");
+
             Console.ReadKey();
         }
     }
