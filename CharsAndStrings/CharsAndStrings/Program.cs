@@ -21,6 +21,15 @@ namespace CharsAndStrings
             Console.WriteLine(char.IsLetter(letter));
             Console.WriteLine(char.IsDigit(letter));
 
+            Console.WriteLine();
+            string s = "Hello";
+            Console.WriteLine(s);   
+            s += ", World";
+            Console.WriteLine(s);
+            Console.WriteLine(s.ToLower());
+            Console.WriteLine(s[7]);
+            Console.WriteLine(s.Substring(7));
+
             Console.ReadKey();
         }
     }
