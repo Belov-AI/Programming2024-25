@@ -71,6 +71,7 @@ namespace CharsAndStrings
             var dt = DateTime.Now;
             Console.WriteLine(dt.ToLongDateString());
             Console.WriteLine(dt.ToShortDateString());
+            Console.WriteLine($"{dt:dddd}");
             Console.WriteLine();
 
             CultureInfo.CurrentCulture = oldCulture;
