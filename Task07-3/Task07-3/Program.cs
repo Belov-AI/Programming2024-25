@@ -48,7 +48,7 @@ namespace Task07_3
         static bool IsPownPositionIncorrect(string pawnPosition)
         {
             int column, row;
-            DecodePosition(pawnPosition, out column, out row);
+            (row, column) = DecodePosition(pawnPosition);
 
             return row == 1 || row == 8;
         }
@@ -57,8 +57,8 @@ namespace Task07_3
         {
             int wpRow, wpColumn, pRow, pColumn;
 
-            DecodePosition(whitePawnPosition, out wpColumn, out wpRow);
-            DecodePosition(position, out pColumn, out pRow);
+            (wpRow, wpColumn) = DecodePosition(whitePawnPosition);
+            (pRow, pColumn) = DecodePosition(position);
 
             return wpRow == pRow - 1 && Math.Abs(wpColumn - pColumn) == 1;
         }
@@ -67,8 +67,8 @@ namespace Task07_3
         {
             int bpRow, bpColumn, pRow, pColumn;
 
-            DecodePosition(blackPawnPosition, out bpColumn, out bpRow);
-            DecodePosition(position, out pColumn, out pRow);
+            (bpRow, bpColumn) = DecodePosition(blackPawnPosition);
+            (pRow, pColumn) = DecodePosition(position);
 
             return bpRow == pRow + 1 && Math.Abs(bpColumn - pColumn) == 1;
         }
@@ -78,9 +78,9 @@ namespace Task07_3
         {
             int wr, wc, br, bc, mr, mc;
 
-            DecodePosition(whitePawnPosition, out wc, out wr);
-            DecodePosition(blackPawnPosition, out bc, out br);
-            DecodePosition(move, out mc, out mr);
+            (wr, wc) = DecodePosition(whitePawnPosition);
+            (br, bc) = DecodePosition(blackPawnPosition);
+            (mr, mc) = DecodePosition(move);
 
             var middlePosition = whitePawnPosition[0] + 
                 (int.Parse(whitePawnPosition[1].ToString()) + 1).ToString();
@@ -96,19 +96,21 @@ namespace Task07_3
         {
             int wr, wc, br, bc, mr, mc;
 
-            DecodePosition(whitePawnPosition, out wc, out wr);
-            DecodePosition(blackPawnPosition, out bc, out br);
-            DecodePosition(move, out mc, out mr);
+            (wr, wc) = DecodePosition(whitePawnPosition);
+            (br, bc) = DecodePosition(blackPawnPosition);
+            (mr, mc) = DecodePosition(move);
 
             return wc == mc && (wr == mr - 1 || wr == 2 && wr == mr - 2) && !(br == wr + 1 && wc == bc);
         }
         
 
 
-        static void DecodePosition(string position, out int column, out int row)
+        static (int, int) DecodePosition(string position)
         {
-            column = (int)position[0] - 0x60;
-            row = int.Parse(position[1].ToString());
+            var column = (int)position[0] - 0x60;
+            var row = int.Parse(position[1].ToString());
+
+            return (row, column);
         }
     }
 }
