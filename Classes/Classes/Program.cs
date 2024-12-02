@@ -14,7 +14,7 @@ namespace Classes
             mike = new Person();
             mike.Name = "Михаил";
             mike.LastName = "Иванов";
-            mike.SetAge(20);
+            mike.Age = 20;
 
             var kate = new Person() 
             {
@@ -22,10 +22,17 @@ namespace Classes
                 LastName = "Петрова", 
             };
 
-            kate.SetAge(19);
+            kate.Age = 19;
 
+            var peter = new Person("Пётр", "Сидоров", 21);
+            var anonymous = new Person();
+            
             mike.PrintInfo();
             kate.PrintInfo();
+            peter.PrintInfo();
+            anonymous.PrintInfo();
+
+            var user = new User("user123", "12345");
 
             Console.ReadKey();
         }

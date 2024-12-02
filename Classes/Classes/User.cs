@@ -10,11 +10,31 @@ namespace Classes
     {
         public string Login;
 
-        private string password;
+        private int passwordHash;
 
-        public int GetPasswordHash() 
-        { 
-            return password.GetHashCode();
+        public int PasswordHash
+        {
+            get => passwordHash;
+
+            private set
+            {
+                passwordHash = value;
+            }
         }
+
+        public User(string login, string password)
+        {
+            Login = login;
+            PasswordHash = password.GetHashCode();
+        }
+
+        public void ChangePassword(string newPassword, string oldPassword)
+        {
+            if(oldPassword.GetHashCode() == PasswordHash) 
+            {
+                PasswordHash = newPassword.GetHashCode();
+            }
+        }
+
     }
 }
