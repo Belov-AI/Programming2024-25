@@ -8,6 +8,8 @@ namespace Classes
 {
     public class User
     {
+        private static string logFileName;
+
         public string Login;
 
         private int passwordHash;
@@ -28,12 +30,27 @@ namespace Classes
             PasswordHash = password.GetHashCode();
         }
 
+        static User()
+        {
+            logFileName = "log.txt";
+        }
+
+        ~User() 
+        {
+            Console.WriteLine($"Service.Name>> Пользователь {Login} отсоединился");
+        }
+
         public void ChangePassword(string newPassword, string oldPassword)
         {
             if(oldPassword.GetHashCode() == PasswordHash) 
             {
                 PasswordHash = newPassword.GetHashCode();
             }
+        }
+
+        public bool CheckPassword(string password)
+        {
+            return password.GetHashCode() == PasswordHash;
         }
 
     }

@@ -33,6 +33,10 @@ namespace Classes
             anonymous.PrintInfo();
 
             var user = new User("user123", "12345");
+            var anotherUser = new User("topProggerCS", "qwerty");
+
+            Service.AddUser(user, "12345");
+            Service.AddUser(anotherUser, "12345");
 
             Console.ReadKey();
         }
