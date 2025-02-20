@@ -12,7 +12,7 @@ namespace Classes
 
         public string Login;
 
-        private int passwordHash;
+        protected int passwordHash;
 
         public int PasswordHash
         {
