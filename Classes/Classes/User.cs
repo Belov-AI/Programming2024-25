@@ -53,5 +53,10 @@ namespace Classes
             return password.GetHashCode() == PasswordHash;
         }
 
+        public virtual void PrintInfo()
+        {
+            Console.WriteLine($"Пользователь: {Login}");
+        }
+
     }
 }

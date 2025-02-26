@@ -28,6 +28,20 @@ namespace Classes
             if(accessLevel == AccessLevel.High)
                 passwordHash = newPassword.GetHashCode();
         }
-        
+
+        public override void PrintInfo()
+        {
+            string accessLevel;
+
+            if (this.accessLevel == AccessLevel.Low)
+                accessLevel = "низкий";
+            else if (this.accessLevel == AccessLevel.Medium)
+                accessLevel = "средний";
+            else 
+                accessLevel = "высший";
+
+            Console.WriteLine($"Админимтратор: {Login}. Уровень доступа: {accessLevel}.");
+        }
+
     }
 }

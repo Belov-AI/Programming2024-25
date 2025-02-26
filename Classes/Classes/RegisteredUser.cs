@@ -28,6 +28,11 @@ namespace Classes
 
             Email = newEmail;
         }
+
+        public override void PrintInfo()
+        {
+            Console.WriteLine($"Зарегистрированный пользователь: {Login}. Почта: {Email}");
+        }
     }
 
 }

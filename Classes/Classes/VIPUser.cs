@@ -21,5 +21,10 @@ namespace Classes
             if(CheckPassword(password))
                cadrNumber = newCardNumber;
         }
+
+        public override void PrintInfo()
+        {
+            Console.WriteLine($"VIP-пользователь: {Login}");
+        }
     }
 }
