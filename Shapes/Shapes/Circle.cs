@@ -1,8 +1,9 @@
-﻿using System.Net.NetworkInformation;
+﻿using System;
+using System.Net.NetworkInformation;
 
 namespace Shapes
 {
-    public class Circle : Shape
+    public class Circle : Shape, ICloneable
     {
         Point Center { get; set; }
         public int Radius { get; set; }
@@ -17,5 +18,8 @@ namespace Shapes
         {
             throw new System.NotImplementedException();
         }
+
+        public object Clone() => new Circle(Center.Clone() as Point, Radius);
+
     }
 }

@@ -1,6 +1,8 @@
-﻿namespace Shapes
+﻿using System;
+
+namespace Shapes
 {
-    public class Point
+    public class Point : ICloneable
     {
         public int X;
         public int Y;
@@ -11,5 +13,6 @@
             Y = y;
         }
 
+        public object Clone() => MemberwiseClone();
     }
 }
