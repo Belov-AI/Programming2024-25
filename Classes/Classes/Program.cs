@@ -42,7 +42,7 @@ namespace Classes
             var regUser = new RegisteredUser("Tiger", "55555", "tiger@mail.ru");
             Service.AddUser(regUser, "55555");
 
-            var admin = new Admin("MrPresident", "usa666", "president@gov.com", AccessLevel.High);
+            var admin = new Admin("mrPresident", "usa666", "president@gov.com", AccessLevel.High);
             Service.AddUser(admin, "usa666");
 
             var vipUser = new VIPUser("BillGates", "N{DFOjabm165ryo]rnL", "billgates@microisoft.com", "1234567890");
@@ -50,9 +50,32 @@ namespace Classes
 
             Console.WriteLine();
 
-            Service.PrintUsers();
+            //Service.PrintUsers();
+
+            var myUsers = new User[5];
+            myUsers[0] = user;
+            myUsers[1] = anotherUser;
+            myUsers[2] = regUser;
+            myUsers[3] = admin;
+            myUsers[4] = vipUser;
+
+            PrintUsers(myUsers);
+
+            Console.WriteLine();
+            Array.Sort(myUsers);
+            PrintUsers(myUsers);
+
+            Console.WriteLine();
+            Array.Sort(myUsers, new ReverseAlphabeticalOrderComparer());
+            PrintUsers(myUsers);
 
             Console.ReadKey();
+        }
+
+        public static void PrintUsers(User[] users)
+        {
+            foreach (User user in users)
+                user.PrintInfo();
         }
     }
 }

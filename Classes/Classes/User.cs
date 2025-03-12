@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Classes
 {
-    public class User
+    public class User : IComparable<User>
     {
         private static string logFileName;
 
@@ -58,5 +58,6 @@ namespace Classes
             Console.WriteLine($"Пользователь: {Login}");
         }
 
+        public int CompareTo(User other) => Login.CompareTo(other.Login);
     }
 }
