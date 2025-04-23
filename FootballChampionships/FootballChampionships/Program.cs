@@ -27,6 +27,11 @@ namespace FootballChampionships
             }
 
             PrintDictionary(champions);
+
+            var sortedChamions = new SortedDictionary<string, int>(champions);
+
+            Console.WriteLine();
+            PrintSortedDictionary(sortedChamions);
         }
 
         static void PrintDictionary(Dictionary<string, int> dict)
@@ -35,9 +40,12 @@ namespace FootballChampionships
                 Console.WriteLine($"{item.Key}: {item.Value}");
         }
 
-        static void SortDictionaryByValuesDescending(Dictionary<string, int> dict)
+        static void PrintSortedDictionary(SortedDictionary<string, int> dict)
         {
-            
+            foreach (var item in dict)
+                Console.WriteLine($"{item.Key}: {item.Value}");
         }
+
+
     }
 }
