@@ -10,7 +10,7 @@ namespace Queues
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Введите колочество чисел");
+            Console.WriteLine("Введите количество чисел");
 
             var n = int.Parse(Console.ReadLine());
 
@@ -21,8 +21,25 @@ namespace Queues
 
             var rnd = new Random();
 
+            for(var i = 0; i < n; i++)
+            {
+                int m = rnd.Next(0, 1000);
+                numbers[m % 10].Enqueue(m);
+                Console.Write($"{m} ");
+            }
 
+            Console.WriteLine("\n");
             
+            for (var j = 0; j < numbers.Length; j++)
+                if (numbers[j].Count > 0)
+                {
+                    Console.WriteLine($"Числа, оканчивающиеся на {j}");
+
+                    while (numbers[j].Count > 0)
+                        Console.Write($"{numbers[j].Dequeue()} ");
+
+                    Console.WriteLine("\n");
+                }
         }
     }
 }
