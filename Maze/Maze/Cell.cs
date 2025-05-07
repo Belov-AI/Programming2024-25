@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Maze
+namespace MazeLibrary
 {
-    public struct Cell
+    public class Cell
     {
         public int Row;
         public int Column;
         public bool Wall;
+        public int Weight;
     }
 }

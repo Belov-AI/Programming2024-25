@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Maze
+namespace MazeLibrary
 {
     public class Maze
     {
@@ -58,13 +60,15 @@ namespace Maze
 
             moves.Push(current);
 
+            bool deadend;
+
             while(moves.Count > 0)
             {
-                var deadend = true;
+                deadend = true;
 
                 for (var attempt = 0; attempt < ATTEMPT_NUMBER; attempt++)
                 {
-                    var dir = direction[direction.Length];
+                    var dir = direction[rnd.Next(direction.Length)];
 
                     if(CanMove(current, dir))
                     {
@@ -81,9 +85,10 @@ namespace Maze
                         break;
                     }
 
-                    if (deadend)
-                        current = moves.Pop();
                 }
+
+                if (deadend)
+                    current = moves.Pop();
             }
         }
 
@@ -96,6 +101,78 @@ namespace Maze
                 return false;
 
             return Board[newRow, newColumn].Wall;
+        }
+
+        public Stack<Cell> MakePath(Cell start, Cell end)
+        {
+            var path = new Stack<Cell>();
+
+            if(!start.Wall && !end.Wall & start != end)
+            {
+                MakeWave(start);
+
+
+                var current = end;
+
+                path.Push(current);
+
+                do
+                {
+                    foreach (var dir in direction)
+                    {
+                        var next = Board[current.Row + dir.RowOffset,
+                        current.Column + dir.ColumnOffset];
+
+                        if (!next.Wall && next.Weight < current.Weight)
+                            current = next;
+                        break;
+                    }
+
+                    path.Push(current);
+                } while (current != start);
+            }
+
+            return path;
+        }
+
+        private void MakeWave(Cell cell)
+        {
+            if(cell.Wall) return;
+
+            cell.Weight = 0;
+
+            var cells = new Queue<Cell>();
+
+            for(var i = 0; i < Height; i++)
+                for(var j = 0; j < Width; j++)
+                    Board[i, j].Weight = int.MaxValue;
+
+            cells.Enqueue(cell);
+
+            while(cells.Count > 0)
+            {
+                var current = cells.Dequeue();
+
+                foreach (var dir in direction) 
+                {
+                    var neighbour = Board[current.Row + dir.RowOffset, 
+                        current.Column + dir.ColumnOffset];
+
+                    if (!neighbour.Wall)
+                    {
+                        var weight = current.Weight + 1;
+
+                        if(neighbour.Weight > weight)
+                        {
+                            neighbour.Weight = weight;
+                            cells.Enqueue(neighbour);
+                        }
+                    }
+
+                }
+            }
+
+
         }
     }
 }
