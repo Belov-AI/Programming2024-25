@@ -111,7 +111,6 @@ namespace MazeLibrary
             {
                 MakeWave(start);
 
-
                 var current = end;
 
                 path.Push(current);
@@ -124,8 +123,10 @@ namespace MazeLibrary
                         current.Column + dir.ColumnOffset];
 
                         if (!next.Wall && next.Weight < current.Weight)
+                        {
                             current = next;
-                        break;
+                            break;
+                        }
                     }
 
                     path.Push(current);
@@ -139,13 +140,13 @@ namespace MazeLibrary
         {
             if(cell.Wall) return;
 
-            cell.Weight = 0;
-
             var cells = new Queue<Cell>();
 
             for(var i = 0; i < Height; i++)
                 for(var j = 0; j < Width; j++)
                     Board[i, j].Weight = int.MaxValue;
+
+            cell.Weight = 0;
 
             cells.Enqueue(cell);
 

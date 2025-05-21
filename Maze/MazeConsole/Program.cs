@@ -12,9 +12,26 @@ namespace MazeConsole
     {
         static void Main(string[] args)
         {
-            var maze = new Maze(55,15);
+            int n, m;
+            GetNumbers("Введите ширину и высоту лабиринта (от 5 до 79) через пробел",
+                out n, out m);
+
+
+            var maze = new Maze(n, m);
 
             var path = new Stack<Cell>();
+
+            DispayMaze(maze, path);
+
+            int startColumn, startRow;
+            GetNumbers("Введите строку и столбец начала пути через пробел",
+                out startRow, out startColumn);
+
+            int endColumn, endRow;
+            GetNumbers("Введите строку и столбец   конца пути через пробел",
+                out endRow, out endColumn);
+
+            path = maze.MakePath(maze.Board[startRow, startColumn], maze.Board[endRow, endColumn]);
 
             DispayMaze(maze, path);
         }
@@ -45,10 +62,20 @@ namespace MazeConsole
         static void PrintColumnNumbers(Maze maze)
         {
             Console.Write("  ");
-            
-            for(var j = 0; j < maze.Width; j++)
+
+            for (var j = 0; j < maze.Width; j++)
                 Console.Write(j % 10);
             Console.WriteLine();
+        }
+
+        static void GetNumbers(string message, out int n, out int m)
+        {
+            Console.WriteLine(message);
+            var input = Console.ReadLine();
+            var numbers = input.Split();
+
+            n = int.Parse(numbers[0]);
+            m = int.Parse(numbers[1]);
         }
     }
 }
