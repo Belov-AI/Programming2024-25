@@ -11,8 +11,9 @@ namespace List
         static void Main(string[] args)
         {
             var list = new List<int> { 5, 4, 2, 0, -1, 7 };
+            var words = new List<string> {"cab", "bbbcas", "aabc" };
 
-            PrinList(list);
+            PrintList(list);
             Console.WriteLine();
 
             Console.WriteLine($"Число элементов {list.Count}");
@@ -20,11 +21,15 @@ namespace List
             Console.WriteLine();
 
             QuickSortList(list);
-            PrinList(list);
+            PrintList(list);
+            Console.WriteLine();
 
+            PrintList(words);
+            QuickSortList(words);
+            PrintList(words);
         }
 
-        static void PrinList(List<int> list)
+        static void PrintList<T>(List<T> list)
         {
             foreach (var item in list)
                 Console.Write($"{item} ");
@@ -32,10 +37,11 @@ namespace List
             Console.WriteLine();
         }
 
-        static void QuickSortList(List<int> list) 
+        static void QuickSortList<T>(List<T> list)
+            where T: IComparable<T>
         { 
-            var left = new List<int>();
-            var right = new List<int>();
+            var left = new List<T>();
+            var right = new List<T>();
 
             if(list.Count > 1)
             {
@@ -43,7 +49,7 @@ namespace List
                 list.RemoveAt(0);
 
                 foreach (var item in list)
-                    if(item <  head)
+                    if(item.CompareTo(head) < 0)
                         left.Add(item);
                     else
                         right.Add(item);
